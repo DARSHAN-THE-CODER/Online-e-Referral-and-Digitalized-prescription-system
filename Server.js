@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use(cors())
 var PROCESS=dotenv.config()
 
-mongoose.connect("mongodb+srv://DARSHAN:HACKATHON@health.ql4pt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO);
 var db=mongoose.connection;
 
 db.on('error', console.log.bind(console, "connection error"));

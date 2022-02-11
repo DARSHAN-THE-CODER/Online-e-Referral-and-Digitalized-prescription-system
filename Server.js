@@ -50,7 +50,7 @@ const doctorSchema=new mongoose.Schema({
 })
 
 const patientSchema=new mongoose.Schema({
-    name:String,
+    pname:String,
     gender:String,
     phnumber:String,
     age:Number,
@@ -70,14 +70,14 @@ app.post("/AdminSignup",(req,res)=>{
     const Admin=new Admin({hospitalname,hospcode,place,hierarchy,username,password})
     admin.findOne({hospcode:hospcode},(err,user)=>{
         if(user){
-            res.send({error:"USER ALREADY EXIST"})
+            res.send({error1:"USER ALREADY EXIST"})
         }
         else{
             Admin.save((erro)=>{
                 if(erro)
                 {
                     console.log(erro)
-                    res.send({error:"FAILED TO ADD ADMIN"})
+                    res.send({error2:"FAILED TO ADD ADMIN"})
                 }
                 else{
                     res.send({success:"ADMIN ADDED SUCCESSFULLY"})
@@ -96,7 +96,7 @@ app.get("/AdminLogin/:uname/:pword",(req,res)=>{
     admin.findOne({username:username},(err,user)=>{
         if(err){
             console.log(err)
-            res.send({error:"USER NOT FOUND"})
+            res.send({error1:"USER NOT FOUND"})
         }
         else{
             if(user.password==password){
@@ -104,7 +104,7 @@ app.get("/AdminLogin/:uname/:pword",(req,res)=>{
             }
             else{
                 console.log("INVALID CREDENTIALS")
-                res.send({error:"INVALID CREDENTIALS"})
+                res.send({error2:"INVALID CREDENTIALS"})
             }
         }
     })
@@ -119,10 +119,12 @@ app.post("/DocAdd",(req,res)=>{
         if(user){
             console.log(user)
             console.log("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
+            res.send({error1:"DOCTOR ALREADY EXIST WITH  THAT USERNAME"})
         }
         else{
             Doctor.save((err)=>{
                 if(err){
+                    res.send({error2:"FAILED TO ADD DOCTOR"})
                     console.log("FAILED TO ADD DOCTOR")
                 }
                 else{
@@ -150,7 +152,8 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
     doctor.findOne({username:username},(err,doctor)=>{
         if(err){
             console.log(err)
-            res.send({error:"USER NOT FOUND"})
+            console.log("USER NOT FOUND")
+            res.send({error1:"USER NOT FOUND"})
         }
         if(doctor){
             console.log(doctor)
@@ -159,6 +162,7 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
                 console.log("DOCTOR LOGGED IN")
             }
             else{
+                console.log("PASSWORD IS INCORRECT")
                 res.send({incorrect:"PASSWORD IS INCORRECT"})
             }
         }
@@ -168,15 +172,17 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
 //--------------------ADDING NEW PATIENT BY ADMINS ONLY ----------------------------------------------------
 app.post("/PatientAdd",(req,res)=>{
     const pcode=Math.random().toString(36).substr(2,5);
-    const {name,gender,phnumber,age,place,deptname}=req.body;
-    const patient=new patient({name,gender,phnumber,age,place,deptname,pcode})
+    const {pname,gender,phnumber,age,place,deptname}=req.body;
+    const patient=new patient({pname,gender,phnumber,age,place,deptname,pcode})
     patient.save((err)=>{
         if(err){
-            console.log(err)     
-            res.send({error:"FAILED TO ADD PATIENT"})      
+            console.log(err)   
+            console.log("FAILED TO ADD PATIENT")  
+            res.send({error1:"FAILED TO ADD PATIENT"})      
         }
         else{
             console.log("PATIENT ADDED")
+            res.send({success:"PATIENT ADDED"})
         }
     })
 })
@@ -195,6 +201,8 @@ app.post("/AddPrescription",(req,res)=>{
             }
             if(err){
                 console.log(err)
+                res.send({error1:"UNABLE TO ADD PRESCRIPTION"})
+                console.log("UNABLE TO ADD PRESCRIPTION")
             }
         })
     )
@@ -210,6 +218,8 @@ app.get("/FindPatient/:id",(req,res)=>{
             }
             if(err){
                 console.log(err)
+                console.log("USER NOT EXIST")
+                res.send({error1:"USER NOT EXIST"});
             }
         })
 })
@@ -225,6 +235,8 @@ app.post("/AddReferrals",(req,res)=>{
             }
             else{
                 console.log(err)
+                console.log("UNABLE TO REFER")
+                res.send({error1:"UNABLE TO REFER"})
             }
         })
     )
@@ -236,6 +248,8 @@ app.get("/GetDocList",(req,res)=>{
     doctor.find({},(err,users)=>{
         if(err){
             console.log(err)
+            console.log("FAILED TO FETCH DOCTOR LIST")
+            res.send("FAILED TO FETCH DOCTOR LIST")
         }
         if(users){
             console.log(users)

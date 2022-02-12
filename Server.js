@@ -46,6 +46,7 @@ const doctorSchema=new mongoose.Schema({
     hierarchy:String,
     username:String,
     password:String,
+    patients:[],
     referrals:[]
 })
 
@@ -67,13 +68,13 @@ const doctor=new mongoose.model("Doctor",doctorSchema)
 //--------------------NEW ADMIN (SPECIFICALLY NEW HOSPITAL) SIGNUP--------------------------------------------------
 app.post("/AdminSignup",(req,res)=>{
     const {hospitalname,hospcode,place,hierarchy,username,password}=req.body;
-    const Admin=new Admin({hospitalname,hospcode,place,hierarchy,username,password})
+    const admin1=new admin({hospitalname,hospcode,place,hierarchy,username,password})
     admin.findOne({hospcode:hospcode},(err,user)=>{
         if(user){
             res.send({error1:"USER ALREADY EXIST"})
         }
         else{
-            Admin.save((erro)=>{
+            admin1.save((erro)=>{
                 if(erro)
                 {
                     console.log(erro)
@@ -98,14 +99,20 @@ app.get("/AdminLogin/:uname/:pword",(req,res)=>{
             console.log(err)
             res.send({error1:"USER NOT FOUND"})
         }
-        else{
+        if(user){
+            console.log(password)
+            console.log(user.password)
             if(user.password==password){
-                res.send({success:"LOGIN SUCCESSFULL"})
+                res.send({success:user})
             }
             else{
                 console.log("INVALID CREDENTIALS")
                 res.send({error2:"INVALID CREDENTIALS"})
             }
+        }
+        else{
+            console.log("USER NOT EXIST")
+            res.send({error1:"USER NOT FOUND"})
         }
     })
 })
@@ -113,7 +120,7 @@ app.get("/AdminLogin/:uname/:pword",(req,res)=>{
 //----------------------------NEW DOCTOR ADDING (DONE ONLY BY ADMIN OF HOSPITAL)--------------------------------
 app.post("/DocAdd",(req,res)=>{
     const {docname,age,gender,phnumber,qualification,specialisation,hospitalname,hospcode,place,hierarchy,username,password}=req.body;
-    const Doctor=new doctor({docname,age,gender,phnumber,qualification,specialisation,department,hospitalname,hospcode,place,hierarchy,username,password});
+    const Doctor=new doctor({docname,age,gender,phnumber,qualification,specialisation,hospitalname,hospcode,place,hierarchy,username,password});
 
     doctor.findOne({username:username},(err,user)=>{
         if(user){
@@ -172,17 +179,61 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
 //--------------------ADDING NEW PATIENT BY ADMINS ONLY ----------------------------------------------------
 app.post("/PatientAdd",(req,res)=>{
     const pcode=Math.random().toString(36).substr(2,5);
+    console.log(pcode)
     const {pname,gender,phnumber,age,place,deptname}=req.body;
-    const patient=new patient({pname,gender,phnumber,age,place,deptname,pcode})
-    patient.save((err)=>{
+    const patient1=new patient({pname,gender,phnumber,age,place,deptname,pcode})
+    // patient1.save((err)=>{
+    //     if(err){
+    //         console.log(err)   
+    //         console.log("FAILED TO ADD PATIENT")  
+    //         res.send({error1:"FAILED TO ADD PATIENT"})      
+    //     }
+    //     else{
+    //         console.log("PATIENT ADDED")
+    //         console.log(pcode)
+    //         // doctor.findOneAndUpdate({username:deptname},{$push:{patients:pcode}})
+    //         // .then(
+    //         //     res.send({success:"PATIENT ADDED"})
+    //         // )
+    //         doctor.findOne({username:deptname},(err,doctor)=>{
+    //             if(err){
+    //                 res.send({error2:"FAILED"})
+    //             }
+    //             if(doctor){
+    //                 doctor.findOneAndUpdate({username:deptname},{$push:{patients:pcode}})
+    //                 .then(
+    //                     res.send({success:"PATIENT ADDED"})
+    //                     )
+    //             }
+    //             else{
+    //                 res.send({error3:"NO DOCTOR WITH THE GIVEN ID"})
+    //                 console.log("NO DOCTOR WITH THE GIVEN ID")
+    //             }
+    //         })
+    //     }
+    // })
+    
+    doctor.findOne({username:deptname},(err,doc)=>{
         if(err){
-            console.log(err)   
-            console.log("FAILED TO ADD PATIENT")  
-            res.send({error1:"FAILED TO ADD PATIENT"})      
+            res.send({error2:"FAILED"})
         }
+        if(doc){
+            doctor.findOneAndUpdate({username:deptname},{$push:{patients:pcode}})
+            .then(
+                patient1.save((err)=>{
+                        if(err){
+                                console.log(err)   
+                                console.log("FAILED TO ADD PATIENT")  
+                                res.send({error1:"FAILED TO ADD PATIENT"})      
+                        }else{            
+                            res.send({success:"PATIENT ADDED"})
+                        }
+                    })
+                    )
+                }
         else{
-            console.log("PATIENT ADDED")
-            res.send({success:"PATIENT ADDED"})
+            res.send({error3:"NO DOCTOR WITH THE GIVEN ID"})
+            console.log("NO DOCTOR WITH THE GIVEN ID")
         }
     })
 })

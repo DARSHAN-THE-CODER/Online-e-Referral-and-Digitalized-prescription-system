@@ -53,9 +53,14 @@ const AddPatient =()=>{
       })
 
     function getSteps(){
-        return ["1","2","3"];
+        return ["1","2","3","4"];
     }
     
+    const [gender, setGender] = useState();
+
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+
     const handleNext=(e)=>{
         e.preventDefault();        
         setActiveStep( prevActiveStep=> prevActiveStep+1)
@@ -120,37 +125,67 @@ const AddPatient =()=>{
 
 
     // console.log(cusnameRef.current.value)
-    const [gender, setGender] = useState();
 
-    const [open, setOpen] = useState(false);
-    const closeModal = () => setOpen(false);
 
     useEffect(()=>{
         if(activeStep===steps.length){
 
-            // const doctor= Object({docname:doc.name,age:doc.age,gender:doc.gender,phnumber:doc.num,qualification:doc.qualification,specialisation:doc.specialisation,hospitalname:,hospcode:{},place:{},hierarchy:{},username:doc.username,password:doc.password});
-            // axios({
-            //     method:"post",
-            //     url:"http://localhost:3030/DocAdd",
-            //     data: doctor
-            // })
-            // .then((res)=>{
-            //     if(res.data.error1){
-            //         console.log("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
-            //     }
-            //     if(res.data.error2){
-            //         console.log("FAILED TO ADD DOCTOR")
-            //     }
-            //     if(res.data.success){
-            //         console.log("DOCTOR ADDED SUCCESSFULLY")
-            //     }
-            // })
+            const patient=Object({pname:pat.name,gender:pat.gender,phnumber:pat.num,age:pat.age,place:pat.place,deptname:pat.depname})
+            axios({
+                method:"POST",
+                url:"http://localhost:3030/PatientAdd",
+                data:patient
+            })
+            .then((res)=>{
+                if(res.data.error1){
+                    console.log("FAILED TO ADD PATIENT")  
+                    setErrr("FAILED TO ADD PATIENT")
+                    setTimeout(()=>{
+                        setErrr("")
+                        history.push("/AdminDashboard")
+                    },3000)
+                }
+                
+                if(res.data.error2){
+                    console.log("FAILED")
+                    setErrr("FAILED TO ADD PATIENT")
+                    setTimeout(()=>{
+                        setErrr("")
+                        history.push("/AdminDashboard")
+                    },3000)
+                }
+                if(res.data.error3){
+                    setErrr(res.data.error3)
+                    setTimeout(()=>{
+                        setErrr("")
+                        history.push("/AdminDashboard")
+                    },3000)
+                }
+                if(res.data.success){
+                    console.log("PATIENT ADDED")
+                    setMes("PATIENT ADDED SUCCESSFULLY")
 
-        setTimeout(()=>{
-            if(activeStep===steps.length){
-                // history.push("/Choices")
-            }
-        },5000) 
+                    setTimeout(()=>{
+                        setMes("")
+                        history.push("/AdminDashboard")
+                    },3000)
+                }
+            })
+            .catch((e)=>{
+                console.log(e)
+                setErrr("FAILED TO ADD PATIENT")
+
+                setTimeout(()=>{
+                    setErrr("")
+                    history.push("/AdminDashboard")
+                },3000)
+            })
+
+            // setTimeout(()=>{
+            //     if(activeStep===steps.length){
+            //             // history.push("/Choices")
+            //         }    
+            // },5000) 
         }     
     },[activeStep])
 
@@ -190,7 +225,7 @@ const AddPatient =()=>{
                             <form className="fox" onSubmit={handleNext}>
                             <div className="oppN">
                             <label className="lN" htmlFor="Ac">MOBILE NUMBER</label>
-                            <input type="number" className="oppinpN" pattern="[6789][0-9]{9}" id="Ac" onChange={handleNum} placeholder="10 DIGIT MOBILE NUMBER" value={pat.num || ""} required></input>
+                            <input type="text" className="oppinpN" pattern="[6789][0-9]{9}" id="Ac" onChange={handleNum} placeholder="10 DIGIT MOBILE NUMBER" value={pat.num || ""} required></input>
                             
                             <br></br>
                             <label htmlFor="Na" className="lN">PATIENT PLACE </label>
@@ -210,7 +245,7 @@ const AddPatient =()=>{
                     <div className="f1">
                         <form className="fox" onSubmit={handleNext}>
                         <div className="oppN">
-                            <label className="lN">DEPARTMENT NAME</label>
+                            <label className="lN">DOCTOR ID</label>
                             <input className="oppinpN" type="text" onChange={handleDep}  value={pat.depname || ""} required></input>
                        </div> 
                        <div className="divsubN">
@@ -221,7 +256,7 @@ const AddPatient =()=>{
                     </div>
                     )
             
-            case 7:
+            case 3:
                 return (
                     <div>
                     <form className="fox" onSubmit={handleNext}>
@@ -241,7 +276,7 @@ const AddPatient =()=>{
 
     return(
         <div className="wr">
-        <div   className="lan">ADD DOCTOR</div>
+        <div   className="lan">ADD PATIENT</div>
         <div style={{fontColor:"black"}} className={cla.root}>
             <Stepper  activeStep={activeStep}>
                 {steps.map((labelx)=>(
@@ -254,7 +289,10 @@ const AddPatient =()=>{
 
             {activeStep === steps.length ? (
                 <div style={{marginTop:"20px"}}>
-                <h2 id="cq">"HELLO !! <br></br><Alert variant="success">PATIENT ADDED SUCCESSFULLY</Alert> </h2>
+                <h2 id="cq">"HELLO !! </h2> <br></br>
+                {mes && <Alert variant="success">{mes}</Alert>}
+                {errr && <Alert variant="danger">{errr}</Alert>}
+
                 {
                     <div style={{display:"flex",justifyContent:"center"}}>
                         <CircularProgress />
@@ -267,6 +305,7 @@ const AddPatient =()=>{
                 {getStepsContent(activeStep)}         
             </>
             )}
+
         </div>
         </div>
     )

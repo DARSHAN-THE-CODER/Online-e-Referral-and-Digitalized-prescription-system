@@ -39,7 +39,7 @@ const AddDoc =()=>{
     //hooks
     const [activeStep,setActiveStep]=useState(0);
     const steps=getSteps();
-    const history=useHistory();
+    const history=useHistory();  
     const[mes,setMes]=useState();
     const[errr,setErrr]=useState();
 
@@ -147,23 +147,28 @@ const AddDoc =()=>{
         if(activeStep===steps.length){
 
             console.log(doc)
-            // const doctor= Object({docname:doc.name,age:doc.age,gender:doc.gender,phnumber:doc.num,qualification:doc.qualification,specialisation:doc.specialisation,hospitalname:,hospcode:{},place:{},hierarchy:{},username:doc.username,password:doc.password});
-            // axios({
-            //     method:"post",
-            //     url:"http://localhost:3030/DocAdd",
-            //     data: doctor
-            // })
-            // .then((res)=>{
-            //     if(res.data.error1){
-            //         console.log("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
-            //     }
-            //     if(res.data.error2){
-            //         console.log("FAILED TO ADD DOCTOR")
-            //     }
-            //     if(res.data.success){
-            //         console.log("DOCTOR ADDED SUCCESSFULLY")
-            //     }
-            // })
+            const p=(JSON.parse(localStorage.getItem("adminInfo")))
+
+            const doctor= Object({docname:doc.name,age:doc.age,gender:doc.gender,phnumber:doc.num,qualification:doc.qualification,specialisation:doc.specialisation,hospitalname:p.hospitalname,hospcode:p.hospcode,place:p.place,hierarchy:p.hierarchy,username:doc.username,password:doc.password});
+            axios({
+                method:"post",
+                url:"http://localhost:3030/DocAdd",
+                data: doctor
+            })
+            .then((res)=>{
+                if(res.data.error1){
+                    console.log("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
+                    setErrr("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
+                }
+                if(res.data.error2){
+                    console.log("FAILED TO ADD DOCTOR")
+                    setErrr("FAILED TO ADD DOCTOR")
+                }
+                if(res.data.success){
+                    console.log("DOCTOR ADDED SUCCESSFULLY")
+                    setMes("DOCTOR ADDED SUCCESSFULLY")
+                }
+            })
 
         setTimeout(()=>{
             if(activeStep===steps.length){
@@ -190,8 +195,6 @@ const AddDoc =()=>{
                         <label className="lN" htmlFor="Ac">AGE</label>
                         <input type="number" className="oppinpN"  id="Ac" onChange={handleAge} placeholder="AGE IN NUMBERS" value={doc.age || ""} required></input>
                         </div>
-
-
 
                         <div className="oppN">
                         <label className="lN" htmlFor="Ac">MOBILE NUMBER</label>
@@ -227,7 +230,6 @@ const AddDoc =()=>{
                             <label className="lN">SPECIALISATION</label>
                             <input className="oppinpN" onChange={handleSpecialisation}  value={doc.specialisation || ""} required></input>
                         </div>
-
 
                         <div className="divsubN">
                                 <button className="nexbut2" type="submit">NEXT</button>
@@ -292,12 +294,13 @@ const AddDoc =()=>{
 
             {activeStep === steps.length ? (
                 <div style={{marginTop:"20px"}}>
-                <h2 id="cq">"HELLO !! <br></br><Alert variant="success">DOCTOR ADDED SUCCESSFULLY</Alert> </h2>
+                <h2 id="cq">"HELLO !! </h2><br></br>
+                {errr && <Alert variant="danger">{errr}</Alert> }
+                {mes && <Alert variant="success">{mes}</Alert>}
                 {
                     <div style={{display:"flex",justifyContent:"center"}}>
                         <CircularProgress />
-                    </div>
-                    
+                    </div>    
                 }
                 </div>) : 
             (  

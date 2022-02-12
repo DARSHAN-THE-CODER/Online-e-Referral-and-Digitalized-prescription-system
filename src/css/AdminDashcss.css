@@ -1,0 +1,92 @@
+.mainWrap{
+    /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
+/* background-image: linear-gradient(to right top, #d0d9f0, #c8dcf2, #c0dff1, #bae2ee, #b7e4e8); */
+/* background-image: linear-gradient(to right top, #d1c1ca, #cfb9cc, #c8b3d1, #bcadd8, #aaaadf, #9ab1ea, #84b8f3, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
+/* background-image: linear-gradient(to right top, #f2e5ec, #f4e4e8, #f5e4e3, #f4e4df, #f1e5dc, #ede5da, #e9e6da, #e4e6da, #dee6db, #d9e6dd, #d5e5e0, #d2e4e3); */
+/* background-image: linear-gradient(to right top, #333c3b, #394546, #404e51, #48565d, #525f69, #5b6973, #65727d, #6e7c87, #798991, #86979b, #94a4a5, #a3b1b0); */
+/* background-image: linear-gradient(to right top, #c993eb, #bc9fee, #b3a9ee, #adb2eb, #acb9e5, #bab8e3, #c6b8df, #d0b8db, #e9b0ca, #f7adae, #f4b18f, #dcbc79); */
+display: flex;
+overflow: hidden;
+overflow-y: hidden;
+overflow-x: hidden;
+justify-content: center;
+align-items: center;
+}
+*{
+-ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+display: none;
+}
+
+
+.sps{
+color: aliceblue;
+font-weight: bold;
+/* background-color: rgb(35, 108, 150); */
+background-color: #1d57ad;
+}
+
+.typ{
+color: antiquewhite;
+}
+.sps:hover{
+transition: 0.5s;
+font-family:Comic Sans MS, Comic Sans, cursive;
+/* color: rgb(36, 226, 226); */
+/* background-color: rgb(96, 107, 207); */
+background-color: #19478b;
+}
+
+.row1{
+margin: 2px -2px;
+margin-left: 50px;
+
+/* display: flex;
+justify-content: center;
+align-items: center; */
+/* margin-left: 100px !important; */
+/* display: flex;
+justify-content: center; */
+}
+
+.row1:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.col {
+margin-top: 30px;
+margin-bottom: 30px;
+float: left;
+width: 400px;
+padding: 0 10px;
+
+}
+
+/* .card {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+padding: 16px;
+text-align: center;
+background-color: #f1f1f1;
+} */
+
+@media screen and (max-width: 480px) {
+/* .mainWrap{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+} */
+.row1{
+    margin-top: 20px;
+    margin-left: 7px !important;
+
+}
+.col {
+  width: 100%;
+  display: block;
+  margin-bottom: 20px;
+}
+}

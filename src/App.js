@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar';
 import DoctorLogin from './Components/DoctorLogin.js'
 import AddDoc from './Components/AddDoc'
 import AddPatient from './Components/AddPatient';
+import AdminDashboard from './Components/AdminDashboard';
 
 function App() {
 
@@ -38,7 +39,10 @@ function App() {
               <NavBar />
               <AddPatient />
           </Route>
-
+          <Route exact path="/AdminDashboard">
+              <NavBar />
+              <AdminDashboard />
+          </Route>
         </Switch>
       </Router>
       

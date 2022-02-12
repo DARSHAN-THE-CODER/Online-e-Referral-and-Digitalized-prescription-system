@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {Alert} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../css/AdminLogincss.css'
 import hi from '../images/hello.png'
@@ -9,6 +9,7 @@ function AdminLogin() {
     const ph=useRef()
     const pw=useRef()
     const [error,setError]=useState();
+    const history=useHistory();
 
     function handleSubmit(e){
         e.preventDefault()
@@ -26,9 +27,18 @@ function AdminLogin() {
             if(res.data.error2){
                 console.log("PASSWORD IS INCORRECT")
             }
-        
+            
             if(res.data.success){
                 console.log("USER LOGIN SUCCESS")
+                console.log(res.data.success)
+                const u=res.data.success;
+                localStorage.setItem("adminInfo",JSON.stringify({hierarchy:u.hierarchy,hospcode:u.hospcode,hospitalname:u.hospitalname,place:u.place})); 
+
+            // console.log((JSON.parse(localStorage.getItem("adminInfo"))).hierarchy)
+                
+                setTimeout(()=>{
+                    history.push("/AdminDashboard")
+                },2000)
             }    
         })
     }

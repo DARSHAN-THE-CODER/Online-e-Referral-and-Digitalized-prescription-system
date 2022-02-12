@@ -1,0 +1,234 @@
+
+.upform0p{
+    display: flex;
+    /* height: 102vh; */
+    margin-top: 30px !important;
+    margin-bottom: 40px !important;
+    /* background-size: 20vh; */
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.ko{
+    background-color: #2e95c5;
+    font-size: 50px;
+    color: aliceblue;
+    margin-top: 20px;
+}
+
+.lx0{
+  /* text-align: center; */
+  font-size: larger;
+  display: flex;
+  /* margin-left: 50px;   */
+  justify-content: center;
+  height: 90px;
+}
+
+form.upform20k{
+    
+    text-align: left;
+    /* margin-top: 90px; */
+    font-size: 20px;
+    width: 530px;
+    background-color: #1d57ad;
+    padding:2vw;
+    border-radius: 20px;
+    color: #091e38;
+    border-color: 30px #324B4B;
+    /* border-style: solid; */
+}
+.opp0p{
+    display: grid;
+    margin-top: 20px;
+    justify-content: center;
+    vertical-align: center;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+.labep{
+    font-weight: bolder;
+    width: 350px;
+    font-size: 30px;
+}
+/* input{
+    margin-left: 0px;
+    font-weight: 400;
+    transition: 180ms  ease-in-out;
+} */
+
+.rad0{
+    width: 80px;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+.oppinp0p{
+    border: none;
+    align-content: right;
+    border-radius: 9px;
+    border-color: unset;
+    width: 350px !important;
+    justify-content: right;
+    transition: 180ms box-shadow ease-in-out;
+}
+.oppinp0p:focus{
+    box-shadow: 1px -1px 0 rgb(67, 175, 207), 0 1px 2px rgba(50, 227, 250, 0.1) inset, 0 0 10px rgba(16, 236, 207, 0.9);
+}
+
+.su10{
+    width: 100px;
+    display: flex;
+    margin-left: 40px;
+    justify-content: center;
+    font-weight: bolder;
+    cursor: pointer;
+    background-color: #0c2e57;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.su10:hover{
+    background-color: rgb(47, 196, 181);
+    color: #0c2e57;
+    font-weight: bold;
+}
+.dilink0{
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+.divsub20{
+    display: flex;
+    justify-content: center;
+}
+
+.dc0{
+    /* font-size: 20px; */
+    color: #152b44;
+    cursor: pointer;
+    margin-left: px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.dc0:hover{
+    color: #070e18;
+    text-decoration: underline;
+}
+
+/* opp0z labez rad0z */
+
+.opp0z{
+    display: flex;
+    margin-top: 20px;
+    vertical-align: center;
+    padding-bottom: 10px;
+}
+.labez{
+    font-weight: bold;
+    width: 300px;
+}
+
+.rad0z{
+    width: 60px;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.lsl{
+    height: 2px;
+}
+
+@media screen and (orientation:landscape) 
+and (max-width: 900px) {
+    
+    form.upform20{
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .upform0{
+        height: 100%;
+    }
+ }
+
+
+@media screen and (max-width: 600px)  {
+.upform0p{
+
+    /* margin-top:20px; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}    
+form.upform20k{
+    display: grid;
+    font-size: larger;
+    width: 300px;
+    margin-top: 60px !important;
+    justify-content: center; 
+    
+    border-radius: 20px;
+    margin-bottom: 60px;
+    background-color: #1d57ad;
+    color: #091e38;
+}
+.labep{
+    text-align:center;
+}
+.opp0{
+    margin: none;
+    display: grid;
+    justify-content: center;
+    grid-gap: 1px;
+    margin-top: none;
+    vertical-align: none;
+}
+.oppinp0p{
+    width: 250px !important;
+    display: flex;
+    justify-content: center;
+    margin-left: 40px;
+    /* text-align: center; */
+    /* align-items: center; */
+}
+input{
+    margin: none;
+    /* margin-left: 2px; */
+    width: 260px;
+}
+.su0{
+    margin-top: none;
+    width: 270px;
+
+}
+.dilink0{
+    text-align: center;
+}
+
+
+.opp0z{
+    margin: none;
+    display: inline;
+    grid-gap: 1px;
+    margin-top: none;
+    vertical-align: none;
+}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}   
+
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}

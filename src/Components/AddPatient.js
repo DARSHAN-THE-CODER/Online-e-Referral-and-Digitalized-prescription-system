@@ -126,7 +126,7 @@ const AddPatient =()=>{
 
     // console.log(cusnameRef.current.value)
 
-
+    const [ch,setCh]=useState(false)
     useEffect(()=>{
         if(activeStep===steps.length){
 
@@ -139,6 +139,7 @@ const AddPatient =()=>{
             .then((res)=>{
                 if(res.data.error1){
                     console.log("FAILED TO ADD PATIENT")  
+                    setCh(true)
                     setErrr("FAILED TO ADD PATIENT")
                     setTimeout(()=>{
                         setErrr("")
@@ -148,14 +149,17 @@ const AddPatient =()=>{
                 
                 if(res.data.error2){
                     console.log("FAILED")
+                    setCh(true)
                     setErrr("FAILED TO ADD PATIENT")
                     setTimeout(()=>{
                         setErrr("")
                         history.push("/AdminDashboard")
                     },3000)
+
                 }
                 if(res.data.error3){
                     setErrr(res.data.error3)
+                    setCh(true)
                     setTimeout(()=>{
                         setErrr("")
                         history.push("/AdminDashboard")
@@ -163,6 +167,7 @@ const AddPatient =()=>{
                 }
                 if(res.data.success){
                     console.log("PATIENT ADDED")
+                    setCh(true)
                     setMes("PATIENT ADDED SUCCESSFULLY")
 
                     setTimeout(()=>{
@@ -180,7 +185,9 @@ const AddPatient =()=>{
                     history.push("/AdminDashboard")
                 },3000)
             })
-
+            if(ch){
+                history.push("/AdminDashboard")
+            }
             // setTimeout(()=>{
             //     if(activeStep===steps.length){
             //             // history.push("/Choices")

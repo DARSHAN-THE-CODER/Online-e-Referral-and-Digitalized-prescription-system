@@ -4,7 +4,7 @@ html {
   
  .wr{
     background-color:"green";
-    height: 100vh;
+    /* height: 100vh; */
     padding-top:100px;
     background-image: linear-gradient(to right top, #6780d8, #6783d5, #6886d1, #6a89ce, #6d8cca, #6d96ce, #6fa0d2, #74aad4, #7ebddc, #90d0e3, #a7e2e9, #c1f3f0); 
     /* background-image: linear-gradient(to right top, #eb7d7d, #e66f8e, #d867a3, #bf65b8, #9869cb, #906ad1, #866bd7, #7a6cdd, #a066da, #c15fd2, #dd57c6, #f64fb7); */
@@ -41,7 +41,8 @@ html {
 .divsubN{
     margin-top: 4px;
     justify-content: center;
-    display: flex;
+    /* display: flex; */
+
 }
 /* .oppN{
     display: flex;
@@ -50,11 +51,13 @@ html {
 .lN{
     justify-content: center;
     font-size: 30px;
+    /* width: 900px; */
     margin-right: px;
 }
 .oppN{
+    /* display: flex; */
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .nexbut{
     background-color: rgb(8, 255, 234);

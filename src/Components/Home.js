@@ -1,58 +1,51 @@
 import React from "react";
-import './HomeCss.css'
+import '../css/HomeCss.css'
 // import {Carousel} from 'react-bootstrap'
+import quta from '../images/quta.jpeg'
+import doc from '../images/doc.jpeg'
+// import ref from '../images/ref.jfif'
+// import refi from '../images/refi.png'
+import re from '../images/re.jpeg'
+import com from '../images/Untitled.jpeg'
+
 
 export default function Home() {
 
     return (
         <div>
             <div className="home">
-                {/* <img src={loop} alt="loop" className="lo"></img> */}
-                {/* <p className="quote"> */}
-                    {/* "There's nothing which can escape from the black hole , <br></br> */}
-                    {/* and as such there's no problem that goes uncovered by our LoopHole" */}
-                {/* </p> */}
-                {/* <Carousel>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src="https://qph.fs.quoracdn.net/main-qimg-32768633489caceefc71bf13f5595e89-c"
-                        alt="First slide"
-                    />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src="https://qph.fs.quoracdn.net/main-qimg-32768633489caceefc71bf13f5595e89-c"
-                        alt="Second slide"
-                    />
+                <h1 className="headi">SWASTH</h1>
+                
+                <hr className="headhr"></hr>
+                <div className="imgp">
+                <img className="qut" src={quta} alt="img" ></img>
+                <p className="tagl">A hospital is no place to be sick.</p>
+                </div>
+                <hr className="headhr"></hr>
+                <h1>MAKING INDIA HEALTHY</h1>
+                
+                <div className="outf">
+                    <div className="f1">
+                    <h3 className="tit"><span>DIGITISED PRESICRIPTION</span></h3>
+                    <img className="f1" src={doc} alt="img"/>
+                    </div>
 
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src="https://qph.fs.quoracdn.net/main-qimg-32768633489caceefc71bf13f5595e89-c"
-                        alt="Third slide"
-                    />
+                    <div className="f2">
+                    <h3 className="tit">SEAMLESS E-REFRERL SYSTEM</h3>
+                    <img className="f1" src={re} alt="img"/>
+                    </div>
 
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel> */}
+                    <div className="f1">
+                    <h3 className="tit">BUILDING DOCTORS VIRTUAL COMMUNITY</h3>
+                    <img className="f1" src={com} alt="img"/>
+
+                    </div>
+                </div>
+                
+                    
+                    
+
             </div>
-
-
-
         </div>
     )
 }

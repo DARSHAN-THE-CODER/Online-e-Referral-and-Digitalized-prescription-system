@@ -49,7 +49,7 @@ function AdminSignup(){
 
         console.log(info.hospCode)
         const admin= Object({hospitalname:info.hospName,hospcode:info.hospCode,place:info.place,hierarchy:typ,username:info.uname,password:info.pass});
-
+        console.log(admin)
         axios({
             method:"POST",
             url:"http://localhost:3030/AdminSignup",
@@ -88,17 +88,17 @@ function AdminSignup(){
 
                     <div className='opp0'>
                         <label className='labe' htmlFor="hospName">HOSPITAL NAME</label>
-                        <input className="oppinp0" onChange={handleChange} type="text" id="hospName" placeholder="Name" required></input>
+                        <input className="oppinp0" onChange={handleChange} type="text" name="hospName" id="hospName" placeholder="Name" required></input>
                     </div>
 
                     <div className='opp0'>
                     <label className="labe" htmlFor="hospCode">HOSPITAL CODE</label>
-                    <input className="oppinp0" onChange={handleChange} type="text" id="hospCode" placeholder="Code" required></input>
+                    <input className="oppinp0" onChange={handleChange} type="text" name="hospCode" id="hospCode" placeholder="Code" required></input>
                     </div>
                                
                     <div className='opp0'>
                     <label style={{display:"block"}} className="labe" htmlFor="pl">PLACE </label>
-                    <input className="oppinp0" onChange={handleChange} type="text" id="pl" placeholder="Place" required></input>
+                    <input className="oppinp0" onChange={handleChange} name="place" type="text" id="pl" placeholder="Place" required></input>
                     </div>
                     <div className='opp0z'>
                     <label className="labez" htmlFor="sel">HOSPITAL TYPE</label>              
@@ -108,12 +108,12 @@ function AdminSignup(){
 
                     <div className='opp0'>
                     <label className="labe" htmlFor="uname">SET USER NAME </label>
-                    <input className="oppinp0" onChange={handleChange} type="text" id="uname" placeholder="User Name" required></input>
+                    <input className="oppinp0" onChange={handleChange} type="text" name="uname" id="uname" placeholder="User Name" required></input>
                     </div>
                     
                     <div className='opp0'>
                     <label className="labe" htmlFor="pass">PASSWORD</label>
-                    <input className="oppinp0" onChange={handleChange} type="password" id="pass" placeholder="password" required></input>
+                    <input className="oppinp0" onChange={handleChange} name="pass" type="password" id="pass" placeholder="password" required></input>
                     </div>
 
                     <hr className='hni'></hr>

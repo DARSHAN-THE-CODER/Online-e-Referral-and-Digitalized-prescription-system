@@ -159,14 +159,26 @@ const AddDoc =()=>{
                 if(res.data.error1){
                     console.log("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
                     setErrr("DOCTOR ALREADY EXIST WITH  THAT USERNAME")
+                    setTimeout(()=>{
+                        setErrr("")
+                        history.push("/AdminDashboard")
+                    },3000)
                 }
                 if(res.data.error2){
                     console.log("FAILED TO ADD DOCTOR")
                     setErrr("FAILED TO ADD DOCTOR")
+                    setTimeout(()=>{
+                      setErrr("")
+                      history.push("/AdminDashboard")
+                  },3000)
                 }
                 if(res.data.success){
                     console.log("DOCTOR ADDED SUCCESSFULLY")
                     setMes("DOCTOR ADDED SUCCESSFULLY")
+                    setTimeout(()=>{
+                      setMes("")
+                      history.push("/AdminDashboard")
+                  },3000)
                 }
             })
 
@@ -186,13 +198,13 @@ const AddDoc =()=>{
                     <div className="f1">
                         <form className="fox" onSubmit={handleNext} >
                         <div className="oppN">
-                        <label htmlFor="Na" className="lN">DOCTOR NAME </label><br></br><br></br>
+                        <label htmlFor="Na" className="lN">DOCTOR NAME </label>
                         <input id="Na" type="text" className="oppinpN" placeholder="ENTER NAME" onChange={handleName} value={doc.name || ""} required></input>
                         </div>
                        
 
                         <div className="oppN">
-                        <label className="lN" htmlFor="Ac">AGE</label>
+                        <label className="lN" htmlFor="Ac">DOCTOR AGE </label>
                         <input type="number" className="oppinpN"  id="Ac" onChange={handleAge} placeholder="AGE IN NUMBERS" value={doc.age || ""} required></input>
                         </div>
 

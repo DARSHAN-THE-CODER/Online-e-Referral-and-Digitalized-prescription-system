@@ -23,9 +23,11 @@ function AdminLogin() {
         .then((res)=>{
             if(res.data.error1){
                 console.log("USER NOT FOUND")
+                setError("USER NOT FOUND")
             } 
             if(res.data.error2){
                 console.log("PASSWORD IS INCORRECT")
+                setError("PASSWORD IS INCORRECT")
             }
             
             if(res.data.success){
@@ -34,7 +36,7 @@ function AdminLogin() {
                 const u=res.data.success;
                 localStorage.setItem("adminInfo",JSON.stringify({hierarchy:u.hierarchy,hospcode:u.hospcode,hospitalname:u.hospitalname,place:u.place})); 
 
-            // console.log((JSON.parse(localStorage.getItem("adminInfo"))).hierarchy)
+            // console.log((JSON.parse(localStorage.getItem("doctInfo"))).hierarchy)
                 
                 setTimeout(()=>{
                     history.push("/AdminDashboard")

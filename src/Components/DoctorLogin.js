@@ -6,7 +6,7 @@ import '../css/AdminLogincss.css'
 import hi from '../images/hello.png'
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
-
+import {useHistory} from 'react-router-dom';
 
 function DoctorLogin() {
 
@@ -15,7 +15,7 @@ function DoctorLogin() {
     const [error,setError]=useState();
     const [mes,setMes]=useState();
     const [loading, setLoading] = useState(false)
-
+    const history=useHistory()
     function handleSubmit(e){
         e.preventDefault()
         setLoading(true)
@@ -37,8 +37,12 @@ function DoctorLogin() {
             }
         
             if(res.data.success){
+                console.log(res.data.success)
+                const y=res.data.success;
+                localStorage.setItem("doctInfo",JSON.stringify({docname:y.docname,hierarchy:y.hierarchy,hospcode:y.hospcode,hospname:y.hospname,patients:y.patients,place:y.place,qualification:y.qualification,referrals:y.referrals,username:y.username,specialisation:y.specialisation}))
                 console.log("DOCTOR LOGGED IN")
                 setMes("DOCTOR LOGGED IN")
+                history.push("/Docdashboard")
             }    
         })
         setLoading(false)

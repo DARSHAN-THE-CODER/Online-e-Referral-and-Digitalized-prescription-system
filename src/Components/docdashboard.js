@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import pat from '../images/pat2.png'
-import referr from '../images/refer.png'
+import referr from '../images/refer2.png'
 import Typography from '@mui/material/Typography';
 import { Button , CardActionArea, CardActions } from '@mui/material';
 
@@ -31,13 +31,13 @@ function addRefernce(){
         <CardActionArea className='cad'>
         <CardMedia
           component="img"
-          height="260"
+          height="370"
           image={pat}
           alt="doctor"
         />
         <CardContent className='sps' >
           <Typography  gutterBottom variant="h5" component="div">
-            ADD DESCRIPTION 
+            MY PATIENTS
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -54,7 +54,8 @@ function addRefernce(){
       <CardActionArea className='cad'>
         <CardMedia
           component="img"
-          height="260"
+          // height="260"
+          height="370"
           image={referr}
           alt="patient"
         />

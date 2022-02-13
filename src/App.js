@@ -15,6 +15,8 @@ import Docdashboard from './Components/docdashboard';
 import PatientShow from './Components/PatientShow';
 import DoctorRoute from './Components/DoctorRoute'
 import Refer from './Components/Refer'
+import About from './Components/Aboutus'
+import Contact from './Components/Contact'
 function App() {
 
   return (
@@ -40,7 +42,10 @@ function App() {
               {/* <AdminLogin /> */}
               <PrivateRoute exact path="/Admin_in" component={AdminLogin} />
           </Route>
-          
+          <Route exact path="/Contact">
+              <NavBar />
+              <Contact />
+          </Route>
           <Route exact path="/AddDoc">
               <NewNav/>
               <AddDoc />
@@ -63,7 +68,10 @@ function App() {
               <NewNav />
               <PatientShow />
           </Route>
-
+          <Route exact path="/About">
+              <NavBar />
+              <About />
+          </Route>
           <Route exact path="/Refer">
               <NewNav />
               <Refer />

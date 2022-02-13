@@ -110,7 +110,7 @@ function PatientShow() {
     function createName(str,index){
       var namie = str.slice(0,str.length-6)
       return(
-        <button key={index} className="namebtn" value={str}>{namie}</button>
+        <button className="lxj" key={index} value={str}>{namie}</button>
       )
 
     }
@@ -171,13 +171,18 @@ function PatientShow() {
 
   return (
     <div style={mys}>
+      <h1 className="hki">PATIENTS LIST</h1>
       {patList.map(createName)}
-      <h2>PREVIOUS PRESPRIPTICTION </h2>
+      <hr></hr>
+      <h2 className="hki">PREVIOUS PRESPRIPTICTIONS </h2>
       <div>
         <p  className="prevPres"></p>
       </div>
-      <button onClick={getPrevPres} >Get Pres</button>
-      <h2>DETAILED PRESPRIPTICTION </h2>
+      <hr></hr>
+      <button className="fto1" onClick={getPrevPres} >SHOW PRESCRIPTION</button>
+      <hr></hr>
+      <br></br>
+      <h2 className="hki">ADD DETAILED PRESPRIPTICTION </h2>
       <div>
       <ReactQuill
         theme="snow"
@@ -189,13 +194,13 @@ function PatientShow() {
       >
         <div className="my-editing-area" />
       </ReactQuill>
-      <button onClick={handleChange}>SUBMIT</button>
       </div>
-        
-
-      <button onClick={handleBClick}>NEXT PATIENT</button>
+      <div className="jox">
+      <button className="fto1" onClick={handleChange}>SUBMIT</button>
+      <button className="fto1" onClick={handleBClick}>NEXT PATIENT</button>
+      </div>
       <br></br>
-        
+      <hr></hr>
       {mes && <Alert variant="success">{mes}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}
     </div>

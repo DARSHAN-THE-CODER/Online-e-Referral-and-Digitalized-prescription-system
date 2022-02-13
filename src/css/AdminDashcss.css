@@ -6,10 +6,12 @@
 /* background-image: linear-gradient(to right top, #333c3b, #394546, #404e51, #48565d, #525f69, #5b6973, #65727d, #6e7c87, #798991, #86979b, #94a4a5, #a3b1b0); */
 /* background-image: linear-gradient(to right top, #c993eb, #bc9fee, #b3a9ee, #adb2eb, #acb9e5, #bab8e3, #c6b8df, #d0b8db, #e9b0ca, #f7adae, #f4b18f, #dcbc79); */
 display: flex;
+background-color: powderblue;
 overflow: hidden;
 overflow-y: hidden;
 overflow-x: hidden;
 justify-content: center;
+background-size: 100vh;
 align-items: center;
 }
 *{

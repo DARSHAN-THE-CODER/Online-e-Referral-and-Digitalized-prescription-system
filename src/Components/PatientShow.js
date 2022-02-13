@@ -6,8 +6,7 @@ import ReactQuill from "react-quill";
 import "quill-mention";
 import "quill-mention/dist/quill.mention.css";
 import {Alert} from 'react-bootstrap'
-
-// import "../css/PatientShow.css";
+import "../css/PatientShow.css";
 
 function PatientShow() {
 
@@ -122,7 +121,7 @@ function PatientShow() {
     function createName(str,index){
       var namie = str.slice(0,str.length-6)
       return(
-        <button key={index} className="namebtn" value={str}>{namie}</button>
+        <button className="lxj" key={index}  value={str}>{namie}</button>
       )
 
     }
@@ -201,9 +200,12 @@ function PatientShow() {
 
   return (
     <div style={mys}>
+      <h1 className="hki">PATIENTS LIST</h1>
       {patList.map(createName)}
-      <h2>DETAILED DESRIPTION </h2>
-      <div>
+      <hr></hr>
+      <fieldset className="fsett">
+      <h2>ADD DETAILED DESRIPTION </h2>
+      <div className="fsett">
       <ReactQuill
         theme="snow"
         modules={modules}
@@ -213,17 +215,21 @@ function PatientShow() {
         onChange={handleProcedureContentChange}
       >
         <div className="my-editing-area" />
-      </ReactQuill>
-      <button onClick={handleChange}>SUBMIT</button>
+      </ReactQuill>      
       </div>
-
-      <button onClick={handleBClick}>NEXT</button>
+      </fieldset>
+      <div className="jox">
+      <button className="fto1" onClick={handleChange}>SUBMIT</button>
+      <button className="fto1" onClick={handleBClick}>NEXT PATIENT</button>
+        
+      </div>
       <br></br>
-      {/* <form onSubmit={handleSubform}> */}
-        <input ref={jj} type="text" ></input>
-        <button onClick={handleSubform}>Submit</button>
-        {/* <button onClick={changePage}>REFER PAGE</button>    */}
-      {/* </form> */}
+      <hr className="qli"></hr>
+      <div className="klop">
+        <label className="ops" for="hj">REFER TO </label>
+        <input id="hj" ref={jj} type="text" ></input>
+        <button className="fto" onClick={handleSubform}>SUBMIT</button>
+      </div>
       {mes && <Alert variant="success">{mes}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}
     </div>

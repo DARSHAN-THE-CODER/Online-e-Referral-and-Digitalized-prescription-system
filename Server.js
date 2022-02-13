@@ -68,6 +68,7 @@ const doctor=new mongoose.model("Doctor",doctorSchema)
 //--------------------NEW ADMIN (SPECIFICALLY NEW HOSPITAL) SIGNUP--------------------------------------------------
 app.post("/AdminSignup",(req,res)=>{
     const {hospitalname,hospcode,place,hierarchy,username,password}=req.body;
+    console.log(req.body);
     const admin1=new admin({hospitalname,hospcode,place,hierarchy,username,password})
     admin.findOne({hospcode:hospcode},(err,user)=>{
         if(user){
@@ -165,7 +166,7 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
         if(doctor){
             console.log(doctor)
             if(doctor.password==password){
-                res.send({success:"USER LOGGED IN SUCCESSFULLY"})
+                res.send({success:doctor})
                 console.log("DOCTOR LOGGED IN")
             }
             else{
@@ -178,9 +179,11 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
 
 //--------------------ADDING NEW PATIENT BY ADMINS ONLY ----------------------------------------------------
 app.post("/PatientAdd",(req,res)=>{
-    const pcode=Math.random().toString(36).substr(2,5);
+    var pcode=Math.random().toString(36).substr(2,5);
     console.log(pcode)
+    
     const {pname,gender,phnumber,age,place,deptname}=req.body;
+    pcode=pname+"_"+pcode;
     const patient1=new patient({pname,gender,phnumber,age,place,deptname,pcode})
     // patient1.save((err)=>{
     //     if(err){
@@ -243,6 +246,8 @@ app.post("/PatientAdd",(req,res)=>{
 //--------------DOCTORS ADDING PRESCRIPTION OF PATIENT -----------------------------------------------------
 app.post("/AddPrescription",(req,res)=>{
     const {pcode , prescription}=req.body;
+    console.log(pcode)
+    console.log(prescription)
     patient.findOneAndUpdate({pcode:pcode},{$push:{prescription:prescription}})
     .then(
         patient.findOne({pcode:pcode},(err,user)=>{
@@ -261,7 +266,8 @@ app.post("/AddPrescription",(req,res)=>{
 
 //----------RETURNS PATIENT DETAILS IF PATIENT-CODE IS GIVEN------------------------------------------------
 app.get("/FindPatient/:id",(req,res)=>{
-        const {pcode}=req.params.id;
+        const pcode=req.params.id;
+        console.log(pcode)
         patient.findOne({pcode:pcode},(err,user)=>{
             if(user){
                 console.log(user)
@@ -278,21 +284,59 @@ app.get("/FindPatient/:id",(req,res)=>{
  //------------IF ONE DOCTOR-REFERS ANOTHER DOCTOR -------------------------------------------------------
 app.post("/AddReferrals",(req,res)=>{
     const {pcode,docusername}=req.body;
-    doctor.findOneAndUpdate({docusername:docusername},{$push:{referrals:pcode}})
-    .then(
-        doctor.findOne({docusername:docusername},(err,doc)=>{
-            if(doc){
-                console.log(doc)
+    console.log(docusername)
+    console.log(pcode)
+    doctor.findOne({username:docusername},(err,doc)=>{
+        if(err){
+            console.log(err)
+        }
+        if(doc){
+            doctor.findOneAndUpdate({username:docusername},{$push:{referrals:pcode}})
+            .then(
+                res.send({success:"PRESCRIPTION ADDED"})     
+            )   
+            .catch(()=>{
+                console.log("FAILED TO ADD")
+                res.send({error1:"FAILED TO ADD"})
             }
-            else{
-                console.log(err)
-                console.log("UNABLE TO REFER")
-                res.send({error1:"UNABLE TO REFER"})
-            }
-        })
-    )
+            )   
+            console.log(doc)
+        }
+        else{
+            console.log("NOT FOUND")
+            res.send({error2:"DOCTOR ID NOT FOUND"})
+        }
+    })
+   
 })
 
+app.post("/RemPat",(req,res)=>{
+    const {pcode,docusername}=req.body;
+    doctor.findOneAndUpdate({username:docusername},{$pull:{patients:pcode}})
+    .then(()=>{
+        res.send({success:"PATIENT REMOVED FROM LIST"})
+        console.log("PATIENT REMOVED")
+    }
+    )
+    .catch((e)=>{
+        console.log(e)
+        res.send({error1:"FAILED TO DELETE"})
+    })
+})
+
+app.post("/RemRefPat",(req,res)=>{
+    const {pcode,docusername}=req.body;
+    doctor.findOneAndUpdate({username:docusername},{pull:{referrals:pcode}})
+    .then(()=>{
+        res.send({success:"PATIENT REMOVED FROM LIST"})
+        console.log("PATIENT REMOVED")
+    }
+    )
+    .catch((e)=>{
+        console.log(e)
+        res.send({error1:"FAILED TO DELETE"})
+    })
+})
 //------------------GETTING LIST OF ALL DOCTORS -------------------------------------------------------
 
 app.get("/GetDocList",(req,res)=>{

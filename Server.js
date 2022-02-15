@@ -112,7 +112,7 @@ app.get("/AdminLogin/:uname/:pword",(req,res)=>{
             }
         }
         else{
-            console.log("USER NOT EXIST")
+            console.log("sdkUSER NOT EXIST")
             res.send({error1:"USER NOT FOUND"})
         }
     })
@@ -173,6 +173,9 @@ app.get("/DoctorLogin/:uname/:pword",(req,res)=>{
                 console.log("PASSWORD IS INCORRECT")
                 res.send({incorrect:"PASSWORD IS INCORRECT"})
             }
+        }
+        else{
+            res.send({error1:"USER NOT FOUND"})
         }
     })
 })
@@ -312,6 +315,8 @@ app.post("/AddReferrals",(req,res)=>{
 
 app.post("/RemPat",(req,res)=>{
     const {pcode,docusername}=req.body;
+    console.log(docusername)
+    console.log(pcode)
     doctor.findOneAndUpdate({username:docusername},{$pull:{patients:pcode}})
     .then(()=>{
         res.send({success:"PATIENT REMOVED FROM LIST"})
@@ -326,7 +331,9 @@ app.post("/RemPat",(req,res)=>{
 
 app.post("/RemRefPat",(req,res)=>{
     const {pcode,docusername}=req.body;
-    doctor.findOneAndUpdate({username:docusername},{pull:{referrals:pcode}})
+    console.log(docusername)
+    console.log(pcode)
+    doctor.findOneAndUpdate({username:docusername},{$pull:{referrals:pcode}})
     .then(()=>{
         res.send({success:"PATIENT REMOVED FROM LIST"})
         console.log("PATIENT REMOVED")
@@ -353,6 +360,28 @@ app.get("/GetDocList",(req,res)=>{
     })
 })
 
+app.get("/DocInfo/:id",(req,res)=>{
+    const docusername=req.params.id;
+    console.log("in docinfo",docusername)
+    doctor.findOne({username:docusername},(err,doc)=>{
+        if(err){
+            console.log(err)
+        }
+        if(doc){
+            res.send({doct:doc})
+        }
+    })
+})
+// doctor.findOneAndUpdate({username:"DARSHAN"},{$pull:{patients:"DARSHAN V_c97mf"}})
+//     .then(()=>{
+//         // res.send({success:"PATIENT REMOVED FROM LIST"})
+//         console.log("PATIENT REMOVED")
+//     }
+//     )
+//     .catch((e)=>{
+//         console.log(e)
+//         // res.send({error1:"FAILED TO DELETE"})
+//     })
 
 app.listen(3030,() =>{
     console.log('server file is running')

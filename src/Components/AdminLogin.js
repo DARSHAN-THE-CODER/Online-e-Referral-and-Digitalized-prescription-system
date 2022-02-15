@@ -38,10 +38,13 @@ function AdminLogin() {
 
             // console.log((JSON.parse(localStorage.getItem("doctInfo"))).hierarchy)
                 
-                setTimeout(()=>{
+
                     history.push("/AdminDashboard")
-                },2000)
-            }    
+
+            }   
+            else{
+                setError("FAILED TO LOGIN !")
+            } 
         })
     }
   return (    
@@ -76,7 +79,9 @@ function AdminLogin() {
                 <input className='su10' value="RESET" type="reset"></input>
             </div>
             
-            {error && <Alert variant='danger'>{error}</Alert>}
+            <div className="xop">
+            {error && <Alert style={{textAlign:"center",marginTop:"none"}} variant='danger'>{error}</Alert>}
+            </div>
         </form>
         </div>
     </div>

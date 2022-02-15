@@ -13,7 +13,7 @@
     background-color: #2e95c5;
     font-size: 50px;
     color: aliceblue;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .lx0{
@@ -49,6 +49,8 @@ form.upform20k{
 .labep{
     font-weight: bolder;
     width: 350px;
+    display: flex;
+    justify-content: center;
     font-size: 30px;
 }
 /* input{
@@ -67,6 +69,7 @@ form.upform20k{
     align-content: right;
     border-radius: 9px;
     border-color: unset;
+    text-align: center;
     width: 350px !important;
     justify-content: right;
     transition: 180ms box-shadow ease-in-out;
@@ -76,9 +79,10 @@ form.upform20k{
 }
 
 .su10{
-    width: 100px;
+    width: 120px;
     display: flex;
-    margin-left: 40px;
+    margin-left: 30px;
+    font-size: 25px;
     justify-content: center;
     font-weight: bolder;
     cursor: pointer;
@@ -139,6 +143,10 @@ form.upform20k{
     height: 2px;
 }
 
+.xop{
+    width: 470px;
+}
+
 @media screen and (orientation:landscape) 
 and (max-width: 900px) {
     
@@ -174,6 +182,11 @@ form.upform20k{
 }
 .labep{
     text-align:center;
+}
+.xop{
+    width: 550px;
+    display: flex;
+    justify-content: center;
 }
 .opp0{
     margin: none;

@@ -12,13 +12,12 @@ function DoctorLogin() {
 
     const ph=useRef()
     const pw=useRef()
-    const [error,setError]=useState();
+    const [error1,setError1]=useState();
     const [mes,setMes]=useState();
     const [loading, setLoading] = useState(false)
     const history=useHistory()
     function handleSubmit(e){
         e.preventDefault()
-        setLoading(true)
         console.log(ph.current.value)
         console.log(pw.current.value)
 
@@ -29,23 +28,26 @@ function DoctorLogin() {
         .then((res)=>{
             if(res.data.error1){
                 console.log("USER NOT FOUND")
-                setError("USER NOT FOUND")
+                setError1("USER NOT FOUND")
             } 
-            if(res.data.error2){
+            else if(res.data.incorrect){
                 console.log("PASSWORD IS INCORRECT")
-                setError("PASSWORD IS INCORRECT")
+                setError1("PASSWORD IS INCORRECT")
             }
         
-            if(res.data.success){
+            else if(res.data.success){
                 console.log(res.data.success)
                 const y=res.data.success;
                 localStorage.setItem("doctInfo",JSON.stringify({docname:y.docname,hierarchy:y.hierarchy,hospcode:y.hospcode,hospname:y.hospname,patients:y.patients,place:y.place,qualification:y.qualification,referrals:y.referrals,username:y.username,specialisation:y.specialisation}))
                 console.log("DOCTOR LOGGED IN")
                 setMes("DOCTOR LOGGED IN")
                 history.push("/Docdashboard")
-            }    
+            } 
+            else{
+                setError1("FAILED TO LOGIN")
+            }
         })
-        setLoading(false)
+        // setLoading(false)
     }
   return (    
     <div   className='mainwrapper0'>
@@ -72,17 +74,19 @@ function DoctorLogin() {
             <input id='prd' required className="oppinp0p" placeholder='PASSWORD' ref={pw} type="password"></input>
             </div>
             
-            <hr className='lsl'></hr>
+            {/* <hr className='lsl'></hr> */}
             <br></br>
             <div className='divsub20'>
-                <input className='su10' disabled={loading} value="SUBMIT" type="submit"></input><br></br>
+                <input className='su10'  value="SUBMIT" type="submit"></input>
                 <input className='su10' value="RESET" type="reset"></input>
             </div>
-            
-            {error && <Alert variant='danger'>{error}</Alert>}
-            {mes && <Alert variant='success'>{mes}</Alert>}
+            <div className="xop">
+            {error1 && <Alert style={{textAlign:"center",marginTop:"none"}} variant='danger'>{error1}</Alert>}
+            </div>
         </form>
+
         </div>
+
     </div>
     )
 }

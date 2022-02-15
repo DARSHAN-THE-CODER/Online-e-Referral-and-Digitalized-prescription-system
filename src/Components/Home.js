@@ -26,12 +26,13 @@ export default function Home() {
                 
                 <div className="outf">
                     <div className="f1">
-                    <h3 className="tit"><span>DIGITISED PRESICRIPTION</span></h3>
+                    <h3 className="tit"><span>DIGITALISED PRESCRIPTION</span></h3>
                     <img className="f1" src={doc} alt="img"/>
                     </div>
 
-                    <div className="f2">
-                    <h3 className="tit">SEAMLESS E-REFRERL SYSTEM</h3>
+                    <div className="f2
+                    ">
+                    <h3 className="tit">SEAMLESS E-REFERRAL SYSTEM</h3>
                     <img className="f1" src={re} alt="img"/>
                     </div>
 

@@ -6,7 +6,7 @@ function Aboutus() {
     return (
         <div className="abts">
             <h1>MORSE CODERS </h1>
-            <p>MADE WITH LOVE ❤️</p>
+            <p>MADE WITH  ❤️</p>
         </div>
     )
 }

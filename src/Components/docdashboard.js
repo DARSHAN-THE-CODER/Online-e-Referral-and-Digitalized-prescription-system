@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 // import PatientShow from './PatientShow'
@@ -16,11 +16,37 @@ function Docdashboard() {
     history.push("/PatientShow")
   }
 
-function addRefernce(){
+  function addRefernce(){
     history.push("/Refer")
   }
 
+  let new1=JSON.parse(localStorage.getItem("doctInfo"))
+  const [dii,setDii]=useState(new1.username)
+  console.log("new1",new1.username)
+  const[ple,setPle]=useState()
+  const[rle,setRle]=useState()
 
+
+    axios({
+      method:"get",
+      url:`http://localhost:3030/DocInfo/${new1.username}`
+    })
+    .then((res)=>{
+      if(res.data.doct){
+        console.log(res.data.doct)
+        const y=res.data.doct;
+        localStorage.setItem("doctInfo",JSON.stringify({docname:y.docname,hierarchy:y.hierarchy,hospcode:y.hospcode,hospname:y.hospname,patients:y.patients,place:y.place,qualification:y.qualification,referrals:y.referrals,username:y.username,specialisation:y.specialisation}))
+        var new3=JSON.parse(localStorage.getItem("doctInfo"))
+        setPle(new3.patients.length)
+        setRle(new3.referrals.length)
+        console.log(ple,rle)
+      }
+    })
+
+
+
+  // const pa=new1.patients.length;
+  // const reff=new1.refrrals.length;
   return (
     <div className='mainWrap'>
 
@@ -37,7 +63,7 @@ function addRefernce(){
         />
         <CardContent className='sps' >
           <Typography  gutterBottom variant="h5" component="div">
-            MY PATIENTS
+            MY PATIENTS({ple})
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -61,7 +87,7 @@ function addRefernce(){
         />
         <CardContent className='sps' >
           <Typography  gutterBottom variant="h5" component="div">
-            REFERRALS
+            REFERRALS({rle})
           </Typography>
         </CardContent>
       </CardActionArea>

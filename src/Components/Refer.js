@@ -118,7 +118,7 @@ function PatientShow() {
     var patid = patList[0];
     console.log(patid)
 
-    
+    const [ppid,setppid] = useState(patid)
 
     function handleBClick(){
       patList.shift();
@@ -126,8 +126,23 @@ function PatientShow() {
       localStorage.setItem("doctInfo",JSON.stringify({docname:new1.docname,hierarchy:new1.hierarchy,hospcode:new1.hospcode,hospname:new1.hospname,patients:patList,place:new1.place,qualification:new1.qualification,referrals:new1.referrals,username:new1.username,specialisation:new1.specialisation}))
       console.log("handle - "+patList);
       console.log("len"+patList.length)
-      console.log("before axios")
-      console.log("after axios")
+
+      const se=Object({pcode:ppid,docusername:new1.username})
+      axios({
+        method:"post",
+        url:"http://localhost:3030/RemRefPat",
+        data:se
+      })
+      .then((res)=>{
+        if(res.data.error1){
+          setError("FAILED TO REMOVE PATIENT")
+
+        }
+        if(res.data.success){
+          console.log("PATIENT REMOVED")
+        }
+    })
+
       window.location.reload();
 
     }

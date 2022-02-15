@@ -15,6 +15,8 @@ function PatientShow() {
   const [mes,setMes]=useState("")
   const jj=useRef()
   
+  
+
   const atValues = [
     { id: 1, value: "Fredrik Sundqvist" },
     { id: 2, value: "Patrik Sjölin" }
@@ -130,7 +132,7 @@ function PatientShow() {
     var patid = patList[0];
     console.log(patid)
 
-    
+    const [ppid,setppid] = useState(patid)
 
     function handleBClick(){
       patList.shift();
@@ -138,9 +140,10 @@ function PatientShow() {
       localStorage.setItem("doctInfo",JSON.stringify({docname:new1.docname,hierarchy:new1.hierarchy,hospcode:new1.hospcode,hospname:new1.hospname,patients:patList,place:new1.place,qualification:new1.qualification,referrals:new1.referrals,username:new1.username,specialisation:new1.specialisation}))
       console.log("handle - "+patList);
       console.log("len"+patList.length)
-      
-      const se={pcode:patList[0],docusername:jj.current.value}
-
+      console.log(new1.username)
+      console.log(ppid)
+      const se={pcode:ppid,docusername:new1.username}
+      console.log(se)
             //------------REMOVING PATIENT FROM LIST-------
             axios({
               method:"post",

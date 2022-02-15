@@ -1,6 +1,8 @@
 
-https://drive.google.com/drive/folders/1wwdoDQ7BJGrZ_gnMvGf2aa_j4qNp9Pjp
-Check out the video and PPT for detailed info and working demo of website 
+
+Check out the video and PPT for detailed info and working demo of website [here](https://drive.google.com/drive/folders/1wwdoDQ7BJGrZ_gnMvGf2aa_j4qNp9Pjp)
+
+CHECK LIVE WORKING OF APP [HERE](https://swasthindia.herokuapp.com/)
 
 # Getting Started with Create React App
 
